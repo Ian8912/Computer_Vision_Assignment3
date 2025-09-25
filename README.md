@@ -90,7 +90,7 @@ def detect_lines(img, sigma, threshold, numLines):
 In your `REPORT.md` file, under a heading for "Part 2", answer the following questions. For this part, use the `data/railroad.jpg` and `data/perpendicular-lines.jpg` images.
 
 **Question 2.1: The Accumulator Space**
-The Hough accumulator is a key concept. Run your completed `detect_lines` function on `railroad.jpg`. The code will display the accumulator image. Include a screenshot of this accumulator in your report. **On the screenshot, circle the two brightest points** and draw arrows pointing to the two railroad tracks in the original image that these points correspond to.
+The Hough accumulator is a key concept. Run your completed `detect_lines` function on `railroad.jpg`. Tune the parameters (e.g. sigma, threshold) to get the best result. Try different values for `numLines` to see the impact on the result. Display the accumulator image for the best result. Include a screenshot of this accumulator in your report. **On the screenshot, circle the two brightest points** and draw arrows pointing to the two railroad tracks in the original image that these points correspond to.
 
 **Question 2.2: Parameter Experimentation**
 The quality of the detected lines depends heavily on the pre-processing and peak-finding parameters. For the `perpendicular-lines.jpg` image, experiment with the `sigma` (for Gaussian blur) and `threshold` (for Canny edge detection) parameters.
