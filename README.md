@@ -1,4 +1,4 @@
-# Assignment 5: Edge & Line Detection
+# Assignment 3: Edge & Line Detection
 
 **Objective:** To understand the full pipeline from detecting low-level edge features to fitting high-level line models. This assignment focuses on debugging, experimentation, and analyzing the impact of parameter choices on algorithmic performance.
 
