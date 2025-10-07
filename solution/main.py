@@ -34,7 +34,11 @@ def main():
 
 
     img = cv.imread("data/perpendicular-lines.jpg", cv.IMREAD_GRAYSCALE)
-    lines = detect_lines(img, sigma=1.5, threshold=50, numLines=5)
+    # img = cv.imread("data/railroad.jpg", cv.IMREAD_GRAYSCALE)
+    
+    lines = detect_lines(img, sigma=2, threshold=30, numLines=5)
+    # Sigma and threshold values to create worse output image
+    # lines = detect_lines(img, sigma=0.2, threshold=10, numLines=5) 
     
     draw_lines(img, lines)
 

@@ -24,7 +24,28 @@ def detect_lines(img, sigma, threshold, numLines):
     # plt.show()
 
     # --- YOUR IMPLEMENTATION GOES HERE (The Hough Space Setup and Voting Process) ---
-    
+
+    # Parameterization: rho = x*cos(theta) + y*sin(theta)
+    # Use 1° theta resolution and 1-pixel rho resolution
+    h, w = edges.shape
+    max_dist = int(np.ceil(np.hypot(h, w)))          # diagonal length
+    rhos = np.arange(-max_dist, max_dist + 1, 1)     # [-R, R]
+    theta_range = np.deg2rad(np.arange(0, 180, 1))   # [0 degrees, 180 degrees)
+    accumulator = np.zeros((len(rhos), len(theta_range)), dtype=np.uint32)
+
+    # Precompute cos/sin for all thetas
+    cos_t = np.cos(theta_range)
+    sin_t = np.sin(theta_range)
+
+    # Get edge (y, x) coordinates
+    ys, xs = np.nonzero(edges)   # edges > 0
+
+    # Vote: for each edge point, compute rho for all thetas and increment bins
+    for y, x in zip(ys, xs):
+        # Vectorized across all thetas
+        r = x * cos_t + y * sin_t                 # shape: [num_thetas]
+        r_idx = np.round(r + max_dist).astype(int)
+        accumulator[r_idx, np.arange(len(theta_range))] += 1
 
     # --- END OF YOUR IMPLEMENTATION ---
 
