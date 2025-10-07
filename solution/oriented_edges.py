@@ -1,4 +1,4 @@
-# solution/oriented_edges.py (BUGGY VERSION)
+# solution/oriented_edges.py (CORRECT VERSION)
 
 import cv2 as cv
 import numpy as np
@@ -24,7 +24,16 @@ def oriented_edges(img, sigma, threshold, direction, tolerance):
     # Check if the edge is within the tolerance
     # Minimal circular difference on a 180° circle → result in [0, 90]
     # Trick: shift into [-90, 90] by wrapping, then take abs
-    angle_diff = np.abs(((edge_direction - normalized_direction + 90.0) % 180.0) - 90.0)
+    def _angle_diff(a, b):
+        return np.abs(((a - b + 90.0) % 180.0) - 90.0)
+
+    assert _angle_diff(0, 179) == 1
+    assert _angle_diff(0, 181) == 1
+    assert _angle_diff(90, 270 % 180) == 0  # 90 vs 90
+    assert _angle_diff(45, 135) == 90   
+
+    angle_diff = _angle_diff(edge_direction, normalized_direction)
+
     within_tolerance_mask = angle_diff <= tolerance
 
     # Combine the Canny edges with our orientation mask
