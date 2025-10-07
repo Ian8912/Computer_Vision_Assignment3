@@ -4,9 +4,9 @@ import sys
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
-from solution.gradient_orientations import gradient_orientations
-from solution.oriented_edges import oriented_edges
-from solution.detect_lines import detect_lines
+from gradient_orientations import gradient_orientations
+from oriented_edges import oriented_edges
+from detect_lines import detect_lines
 
 def main():
     # Load the image
