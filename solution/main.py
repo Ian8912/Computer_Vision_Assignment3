@@ -6,7 +6,7 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 from gradient_orientations import gradient_orientations
-from oriented_edges import oriented_edges
+from oriented_edges import *
 from detect_lines import detect_lines
 
 def main():
@@ -19,6 +19,7 @@ def main():
     direction = 0
     tolerance = 15
     edge_img = oriented_edges(img, sigma, threshold, direction, tolerance)
+    # edge_img = bug_oriented_edges(img, sigma, threshold, direction, tolerance)
     display_image(edge_img, "Oriented Edges")
 
     # Write edge direction images to data/
