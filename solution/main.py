@@ -1,6 +1,7 @@
 import os
 import sys
 
+from pathlib import Path
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,6 +20,16 @@ def main():
     tolerance = 15
     edge_img = oriented_edges(img, sigma, threshold, direction, tolerance)
     display_image(edge_img, "Oriented Edges")
+
+    # Write edge direction images to data/
+    ROOT = Path(__file__).resolve().parents[1]
+    DATA_DIR = ROOT / "data"          
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    for d in [0, 15, 45, 90, 135, 180]:
+        out = oriented_edges(img, 1.4, 40, d, 15)
+        out_path = DATA_DIR / f"edges_dir_{d}.png"
+        cv.imwrite(str(out_path), out)
 
 
     img = cv.imread("data/perpendicular-lines.jpg", cv.IMREAD_GRAYSCALE)
