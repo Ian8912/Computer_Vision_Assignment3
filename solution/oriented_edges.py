@@ -2,7 +2,7 @@
 
 import cv2 as cv
 import numpy as np
-from solution.gradient_orientations import gradient_orientations
+from gradient_orientations import gradient_orientations
 
 def oriented_edges(img, sigma, threshold, direction, tolerance):
     if len(img.shape) == 3:
@@ -22,7 +22,9 @@ def oriented_edges(img, sigma, threshold, direction, tolerance):
     normalized_direction = direction % 180
 
     # Check if the edge is within the tolerance
-    angle_diff = np.abs(edge_direction - normalized_direction)
+    # Minimal circular difference on a 180° circle → result in [0, 90]
+    # Trick: shift into [-90, 90] by wrapping, then take abs
+    angle_diff = np.abs(((edge_direction - normalized_direction + 90.0) % 180.0) - 90.0)
     within_tolerance_mask = angle_diff <= tolerance
 
     # Combine the Canny edges with our orientation mask
